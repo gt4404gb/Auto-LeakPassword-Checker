@@ -8,7 +8,7 @@ logConfig = {
 
 # 请求代理设置
 proxis = {
-         "http": "http://10.211.55.2:8080",
+         "http": "",
          "https": ""
     }
 
