@@ -38,13 +38,17 @@ python3 main.py url.txt
 ```
 爆破的结果会保存在`result/{date}/`文件夹中
 
+支持自定义设置代理等，在common_config.py中进行设置
+
+支持自定义爆破字典等，在auto_login/conf中进行设置
+
 ----
 
 ## 工具说明
 
 本程序主要又以下主要模块构成：
 ### 输入格式化模块 input_format
-整理输入的网页文件，对其格式化处理
+整理输入的网站列表，对其格式化处理
 
 ### crawlergo爬虫模块 crawl_spider
 使用结合crawlergo，爬虫动态爬取页面，并初步判断是否为登录页面
@@ -55,6 +59,9 @@ python3 main.py url.txt
 ### logs日志模块 logs
 记录爆破成功/失败等信息，并将结果输出至result文件夹中
 
+----
+## 演示案例：
+![](./example/example.png)
 ----
 
 ## 警告！
