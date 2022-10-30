@@ -1,3 +1,0 @@
-2022-10-30 14:19:35  id: 1 [+] Success: http://admin.guyuejiaoyu.com/admin/modules/table  test/123
-2022-10-30 14:23:46  id: 1 [+] Success: http://admin.guyuejiaoyu.com/admin/modules/carousel  test/123
-2022-10-30 14:48:24  id: 1 [+] Success: http://admin.guyuejiaoyu.com/admin/modules/element  test/123
