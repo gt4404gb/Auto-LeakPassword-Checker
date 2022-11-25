@@ -124,7 +124,7 @@ class CrackTask:
                 password = password.replace('{user}', username)
                 num = num + 1
                 pbar.set_postfix(username=username, password=password)
-                #print(f"[*] {self.url} 进度: ({num}/{dic_all}) checking: {username} {password}")
+                #print(f"[*] {self.url} 进度: ({num}/{dic_all}) checking: {username.txt} {password}")
                 pbar.update(1)
                 sys.stdout.flush()
                 try:

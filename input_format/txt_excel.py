@@ -48,6 +48,28 @@ class putlist:
                     #         将存在http的信息放入列表中
             return list_url
         #       该方法返回一个存放网址的列表
+        def putcsv(self, filename):
+            # 使用该方法读取excel网址，需输入文件名例如：baidu.txt
+            df = pd.read_csv(filename)
+            # 读取excel文件
+            list_url = []
+            # list_url存放最后的网址
+            url_list = list(df.values)
+            # url_list存放excel中的数据
+            for temp in url_list:
+                # 取excel中出每行数据
+                for temp2 in temp:
+                    m = re.match(self.reg, str(temp2))
+                    # 匹配http
+                    if m == None:
+                        continue
+                    url = self.replace_uri(temp2)
+                    url = url.replace('\r', '').replace('\n', '')
+                    list_url.append(url)
+            #         将存在http的信息放入列表中
+            return list_url
+
+    #       该方法返回一个存放网址的列表
 
     def replace_uri(self,url):
         if('?' in url):
@@ -62,6 +84,10 @@ def formattext(file):
     try:
         if ".xls" in file:
             FormatWebSite = text.putexcel(file)
+            print("导入文件成功！")
+            return FormatWebSite
+        elif ".csv" in file:
+            FormatWebSite = text.putcsv(file)
             print("导入文件成功！")
             return FormatWebSite
         elif ".txt" in file:

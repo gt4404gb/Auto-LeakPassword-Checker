@@ -26,8 +26,8 @@ crackConfig = {
 generatorConfig = {
     "dict_config": {
         "base_dict": {
-            "username_list": txt2list("username_list.txt"),  # 爆破用户名字典
-            "password_list": txt2list("password_list.txt")  # 爆破密码字典
+            "username_list": txt2list("username.txt"),  # 爆破用户名字典
+            "password_list": txt2list("password.txt")  # 爆破密码字典
 
         },
         "domain_dict": {
@@ -150,7 +150,7 @@ cmsConfig = {
     },
     "ecshop": {
         "name": "ecshop",
-        "keywords": "validator.required('username', user_name_empty);",
+        "keywords": "validator.required('username.txt', user_name_empty);",
         "captcha": 0,
         "sqlin_able": 0,
         "success_flag": "ECSCP[admin_pass]",

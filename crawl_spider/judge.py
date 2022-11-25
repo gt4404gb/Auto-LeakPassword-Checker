@@ -12,15 +12,20 @@ spider_start_info = '''
 
 def judge(Url):  # 初次判断是否为登录页面
     Headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.77 Safari/537.36'
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
     }
     try:
-        web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10, verify=False)
+        if("https://" in Url):
+            web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10, verify=False)
+        else:
+            web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10)
         soup = BeautifulSoup(web_data.text, features="lxml")
         soup = soup.text.lower()
+        web_data.close()
 
         if (("登录" in soup)\
-            or ("login" in soup)\
+            or ("login" in soup) \
+            or ("log in" in soup) \
             or ("password" in soup)\
             or ("密码" in soup)\
             or ("用户名" in soup)\

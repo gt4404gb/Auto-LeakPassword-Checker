@@ -21,7 +21,7 @@ if __name__ == '__main__':
             #启动爆破模块
             if resulturl != [] :
                 resulturl = list(set(resulturl)) #列表去重
-                webcrack.run_crack(resulturl)
+                webcrack.run_crack(resulturl[0]) #经过实测发现爆破多个页面没有什么用，一个即可
         except Exception as e:
             print(e)
             continue
