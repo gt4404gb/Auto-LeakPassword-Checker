@@ -30,23 +30,42 @@ def judge(Url):  # 初次判断是否为登录页面
             or ("login" in soup) \
             or ("log in" in soup) \
             or ("password" in soup)\
-            or ("密码" in soup)\
+            or ("密码" in soup) \
+            or ("密碼" in soup) \
             or ("用户名" in soup)\
-            or ("管理系统" in soup)\
-            or ("username" in soup)
-            or ("账户" in soup)):
+            or ("username" in soup)\
+            or ("账户" in soup)\
+            or ("管理系统" in soup)):
             return True
         else:
             return False
     except Exception as e:
-        Log.Error(e)
+        #屏蔽错误信息
+        #Log.Error(e)
         return False
 
+def decodeHtml(Url):
+    Headers = {
+        'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/107.0.0.0 Safari/537.36'
+    }
+    try:
+        if("https://" in Url):
+            web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10, verify=False)
+        else:
+            web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10)
+        code = web_data.apparent_encoding  # 获取url对应的编码格式
+        web_data.encoding = code
+        html = web_data.text
+        return html
+    except Exception as e:
+        print(e)
+        return False
 
 def spiderRun(url):
     print(spider_start_info)
     loginurl = []
     SpiderResult = crawlergo.crawlergo(url)
+    Log.Info("\t爬取页面个数："+str(len(SpiderResult)))
     if not SpiderResult:
         return loginurl
 
@@ -57,7 +76,8 @@ def spiderRun(url):
             if loginurl != []:
                 sign = 0
                 for existurl in loginurl:
-                    if htmlsimilarity.get_html_similarity(existurl,SpiderResulturl):
+                    if htmlsimilarity.get_html_similarity(decodeHtml(SpiderResulturl),decodeHtml(existurl)):
+                        print(loginurl,SpiderResulturl)
                         sign = 1
                         break
                 if sign == 0:

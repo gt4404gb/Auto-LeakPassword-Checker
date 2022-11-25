@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-@author: taoqi
-@file: calc.py
-@time: 2019-07-03 18:22
-"""
 
 
 def calculated_similarity(dom1_eigenvector, dom2_eigenvector, dimension):

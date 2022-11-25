@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-@author: taoqi
-@file: domtree2data.py
-@time: 2019-07-03 14:47
-"""
 
 
 class Converter:

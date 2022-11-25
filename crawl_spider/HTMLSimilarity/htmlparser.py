@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-@author: taoqi
-@file: htmlparser.py
-@time: 2019-07-02 17:17
-"""
 
 from treelib import Tree
 from bs4 import BeautifulSoup

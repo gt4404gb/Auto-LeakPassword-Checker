@@ -1,5 +1,6 @@
 import pandas as pd
 import re
+import logs.log as Log
 
 class putlist:
     reg = r'http(\w)?'

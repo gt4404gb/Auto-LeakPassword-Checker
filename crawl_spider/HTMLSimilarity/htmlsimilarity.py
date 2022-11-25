@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-"""
-@author: taoqi
-@file: HTMLSimilarity.py
-@time: 2019-07-02 16:57
-"""
 
 from crawl_spider.HTMLSimilarity.htmlparser import HTMLParser
 from crawl_spider.HTMLSimilarity.domtree2data import Converter
@@ -21,7 +16,7 @@ def get_html_similarity(html_doc1, html_doc2, dimension=5000):
     converter = Converter(html_doc2_dom_tree, dimension)
     dom2_eigenvector = converter.get_eigenvector()
     value = calculated_similarity(dom1_eigenvector, dom2_eigenvector, dimension)
-    if value > 0.02:
+    if value > 0.04:
         return False
     else:
         return True
