@@ -5,6 +5,7 @@
 本项目基于
 [crawlergo](https://github.com/Qianlitp/crawlergo)
 与 [WebCrack](https://github.com/yzddmr6/WebCrack)
+与 [HTMLSimilarity](https://github.com/SPuerBRead/HTMLSimilarity)
 构建
 感谢以上项目师傅们的付出！
 

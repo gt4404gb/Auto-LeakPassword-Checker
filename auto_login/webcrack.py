@@ -29,4 +29,4 @@ def run_crack(url_list):
     start = datetime.datetime.now()
     single_process_crack(url_list)
     end = datetime.datetime.now()
-    print(f'All processes done! Cost time: {str(end - start)}')
+    print(f'爆破进程完成! 总耗时: {str(end - start)}')

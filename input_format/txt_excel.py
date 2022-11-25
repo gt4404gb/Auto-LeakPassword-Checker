@@ -48,28 +48,27 @@ class putlist:
                     #         将存在http的信息放入列表中
             return list_url
         #       该方法返回一个存放网址的列表
-        def putcsv(self, filename):
-            # 使用该方法读取excel网址，需输入文件名例如：baidu.txt
-            df = pd.read_csv(filename)
-            # 读取excel文件
-            list_url = []
-            # list_url存放最后的网址
-            url_list = list(df.values)
-            # url_list存放excel中的数据
-            for temp in url_list:
-                # 取excel中出每行数据
-                for temp2 in temp:
-                    m = re.match(self.reg, str(temp2))
-                    # 匹配http
-                    if m == None:
-                        continue
-                    url = self.replace_uri(temp2)
-                    url = url.replace('\r', '').replace('\n', '')
-                    list_url.append(url)
-            #         将存在http的信息放入列表中
-            return list_url
 
-    #       该方法返回一个存放网址的列表
+    def putcsv(self,filename):
+        # 使用该方法读取excel网址，需输入文件名例如：baidu.txt
+        df = pd.read_csv(filename, encoding = 'gb2312')
+        # 读取csv文件
+        list_url = []
+        # list_url存放最后的网址
+        url_list = list(df.values)
+        # url_list存放csv中的数据
+        for temp in url_list:
+            # 取csv中出每行数据
+            for temp2 in temp:
+                m = re.match(self.reg, str(temp2))
+                # 匹配http
+                if m == None:
+                    continue
+                url = temp2
+                url = url.replace('\r', '').replace('\n', '')
+                list_url.append(url)
+        #         将存在http的信息放入列表中
+        return list_url
 
     def replace_uri(self,url):
         if('?' in url):

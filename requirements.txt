@@ -6,3 +6,4 @@ numpy
 pandas
 openpyxl
 tqdm
+treelib

@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import common_config
 from crawl_spider import crawlergo
 import logs.log as Log
+import crawl_spider.HTMLSimilarity.htmlsimilarity as htmlsimilarity
 
 spider_start_info = '''
 +---------------------------------------------------+
@@ -19,10 +20,12 @@ def judge(Url):  # 初次判断是否为登录页面
             web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10, verify=False)
         else:
             web_data = requests.get(Url, headers=Headers, proxies=common_config.proxis, timeout=10)
-        soup = BeautifulSoup(web_data.text, features="lxml")
+        code = web_data.apparent_encoding  # 获取url对应的编码格式
+        web_data.encoding = code
+        html = web_data.text
+        soup = BeautifulSoup(html, features="lxml")
         soup = soup.text.lower()
         web_data.close()
-
         if (("登录" in soup)\
             or ("login" in soup) \
             or ("log in" in soup) \
@@ -30,7 +33,8 @@ def judge(Url):  # 初次判断是否为登录页面
             or ("密码" in soup)\
             or ("用户名" in soup)\
             or ("管理系统" in soup)\
-            or ("username" in soup)):
+            or ("username" in soup)
+            or ("账户" in soup)):
             return True
         else:
             return False
@@ -49,9 +53,20 @@ def spiderRun(url):
     Log.Info(url+"\t爬取完成，开始初步登录页面分析...")
     for SpiderResulturl in SpiderResult:
         if (judge(SpiderResulturl)):
-            loginurl.append(SpiderResulturl)
+            #判断网页与已存在的登录页面列表是否相似，相似则不加入
+            if loginurl != []:
+                sign = 0
+                for existurl in loginurl:
+                    if htmlsimilarity.get_html_similarity(existurl,SpiderResulturl):
+                        sign = 1
+                        break
+                if sign == 0:
+                    loginurl.append(SpiderResulturl)
+            else:
+                loginurl.append(SpiderResulturl)
     if (loginurl != []):
         Log.Info(url + "\t初步判断存在登录页面")
+
     else:
         Log.Info(url + "\t未发现登录页面")
     return loginurl
