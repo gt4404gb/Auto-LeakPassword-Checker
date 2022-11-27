@@ -58,14 +58,14 @@ def decodeHtml(Url):
         html = web_data.text
         return html
     except Exception as e:
-        print(e)
+        print("???")
         return False
 
 def spiderRun(url):
     print(spider_start_info)
     loginurl = []
     SpiderResult = crawlergo.crawlergo(url)
-    Log.Info("\t爬取页面个数："+str(len(SpiderResult)))
+    Log.Info("爬取页面个数："+str(len(SpiderResult)))
     if not SpiderResult:
         return loginurl
 
@@ -77,7 +77,7 @@ def spiderRun(url):
                 sign = 0
                 for existurl in loginurl:
                     if htmlsimilarity.get_html_similarity(decodeHtml(SpiderResulturl),decodeHtml(existurl)):
-                        print(loginurl,SpiderResulturl)
+                        #print(loginurl,SpiderResulturl)
                         sign = 1
                         break
                 if sign == 0:

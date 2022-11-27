@@ -30,4 +30,4 @@ def crawlergo(target):
     except Exception as e:
         Log.Error(target + "\t爬取错误")
         print(e)
-        return False
+        return []
